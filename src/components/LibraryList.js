@@ -9,7 +9,7 @@ class LiberaryList extends Component {
   }
 
   render() {
-    console.log(this.props.libraries);
+    // console.log(this.props);
     //performance is better than map every object as tag (map: every item = component (memory usage is high))
     return (
       <FlatList
@@ -23,7 +23,7 @@ class LiberaryList extends Component {
 
 const mapStateToProps = state => {
   // state is the data in the store
-  console.log(state);
+  // console.log(state);
   return { libraries: state.libraries }; //props = this returned object //Liberaries could be any name
 };
 
