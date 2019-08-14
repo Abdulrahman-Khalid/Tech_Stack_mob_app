@@ -23,7 +23,7 @@ class LiberaryList extends Component {
 
 const mapStateToProps = state => {
   // state is the data in the store
-  // console.log(state);
+  console.log(state);
   return { libraries: state.libraries }; //props = this returned object //Liberaries could be any name
 };
 

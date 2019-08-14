@@ -12,6 +12,7 @@ import * as actions from "../actions"; //import all the actions and assign to va
 
 class ListItem extends Component {
   componentDidUpdate() {
+    // to enable animation if the platform is android
     if (Platform.OS === "android") {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -34,13 +35,14 @@ class ListItem extends Component {
     const { library, expanded } = this.props;
     // console.log(this.props);
     if (expanded) {
+      //if it is expanded and clicked the discription hides
       return this.props.unselectLibrary();
     }
     return this.props.selectLibrary(library.id);
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const { titleStyle } = styles;
     const { title } = this.props.library;
 
@@ -65,8 +67,11 @@ const styles = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+  // state is the store state, ownProps is the props of this component
   // return { selectedLibraryId: state.selectedLibraryId };
   const expanded = ownProps.library.id === state.selectedLibraryId;
+  // added to the props of component (expanded only without a key because key is the same name as value it could be {expanded: expanded})
   return { expanded };
 };
 
