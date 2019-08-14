@@ -66,6 +66,7 @@ const styles = {
   }
 };
 
+//when application state changes by calling action creator -> mapStateToProps rerun passing new props to the component which make component rerender
 const mapStateToProps = (state, ownProps) => {
   console.log(state);
   // state is the store state, ownProps is the props of this component
