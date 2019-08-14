@@ -13,6 +13,7 @@ import { createStore } from "redux";
 
 //import reducers
 import reducers from "./reducers"; // m4 fahem
+import LiberaryList from "./components/LibraryList";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
     <Provider store={createStore(reducers)}>
       <View style={{ flex: 1 }}>
         <Header headerText={"Tech Stack"} />
+        <LiberaryList />
       </View>
     </Provider>
   );
