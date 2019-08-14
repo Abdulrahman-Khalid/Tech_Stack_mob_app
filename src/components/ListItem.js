@@ -1,22 +1,39 @@
 import React, { Component } from "react";
-import { Text, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  LayoutAnimation,
+  UIManager
+} from "react-native";
 import CardSection from "./common/CardSection";
 import { connect } from "react-redux";
 import * as actions from "../actions"; //import all the actions and assign to var actions
 
 class ListItem extends Component {
-  renderDescription() {
-    const { library, selectedLibraryId } = this.props;
+  componentDidUpdate() {
+    if (Platform.OS === "android") {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+    LayoutAnimation.spring();
+  }
 
-    if (library.id === selectedLibraryId) {
-      return <Text>{library.description}</Text>;
+  renderDescription() {
+    const { library, expanded } = this.props;
+
+    if (expanded) {
+      return (
+        <CardSection>
+          <Text style={{ flex: 1 }}>{library.description}</Text>
+        </CardSection>
+      );
     }
   }
 
   onPressTouchable = () => {
-    const { library, selectedLibraryId } = this.props;
+    const { library, expanded } = this.props;
     // console.log(this.props);
-    if (library.id === selectedLibraryId) {
+    if (expanded) {
       return this.props.unselectLibrary();
     }
     return this.props.selectLibrary(library.id);
@@ -47,8 +64,10 @@ const styles = {
   }
 };
 
-const mapStateToProps = state => {
-  return { selectedLibraryId: state.selectedLibraryId };
+const mapStateToProps = (state, ownProps) => {
+  // return { selectedLibraryId: state.selectedLibraryId };
+  const expanded = ownProps.library.id === state.selectedLibraryId;
+  return { expanded };
 };
 
 export default connect(
